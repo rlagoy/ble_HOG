@@ -1,0 +1,43 @@
+HID over GATT
+
+SF,1 //factory reset
+SDA,03C1 //GAP is Keyboard
+PS,180F //Add Battery Service
+PC,2A19,02,01 //Add Battery Level characteristic
+PS,180A //Add Device Information Service
+PC,2A50,02,07 //Add PnPID characteristic
+PS,1812 //Add HID Service.
+PC,2A4B,02,02//Report Map
+PC,2A22,12,08//Boot keyboard input characteristic
+PC,2A32,0E,08//Boot keyboard output characteristic
+PC,2A4A,02,04//bcdHID,bCoutryCode,Flags = (2,1,1) total 4 byte
+PC,2A4C,04,01//p21参照（HID Service specification)
+SHW,(battery handle),20 //battery level is 0x20
+SHW,(PnPID),013A5B2A6B8C90 //PnPID, 01(key),3A5B(Vendor ID),2A6B(Product
+ID),8C90(Product Version)
+SHW,(Report Map),2A22 //Report Map, referenced characteristic is Boot keyboard
+input
+SHW,(input report),0000000000000000 //default 0. (Boot Keyboard Input)
+SHW,(output report),0000000000000000 //default 0.(Boot keyboard output)
+SHW,(HID Infomation),01100003 //bcdHID = 0x0110(v1,10), bCountryCode =
+0x00, Flags = 0x03.
+SHW,(HID Control Point),01 //Exit suspend
+
+PZ
+SF,1
+PS,1812
+PC,2A4B,02,02
+PC,2A22,12,08
+PC,2A32,0E,08
+PC,2A4A,02,04
+PC,2A4C,04,01
+SHW,0072,2A22
+SHW,0074,0000000000000000
+SHW,0077,0000000000000000
+
+
+SHW,0074,0000000000000001
+SHW,0074,0000000000000010
+SHW,0074,0000000000000100
+SHW,0074,0000000000001000
+SHW,0074,0000000000010000
